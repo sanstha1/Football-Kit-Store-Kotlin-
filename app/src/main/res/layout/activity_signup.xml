@@ -88,14 +88,14 @@
         app:layout_constraintTop_toBottomOf="@+id/confirmpassword">
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/malegender"
             android:layout_width="wrap_content"
             android:layout_height="49dp"
             android:layout_weight="1"
             android:text="Male" />
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/femalegender"
             android:layout_width="wrap_content"
             android:layout_height="49dp"
             android:layout_weight="1"
@@ -103,7 +103,7 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -114,7 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/confirmpassword" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
@@ -132,7 +132,7 @@
         android:background="@drawable/shape"
         android:text="SIGN UP"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/checkbox" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
