@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1032961849417",
+    "firebase_url": "https://football-kit-store-default-rtdb.firebaseio.com",
+    "project_id": "football-kit-store",
+    "storage_bucket": "football-kit-store.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032961849417:android:74c2c74cd32f7905972798",
+        "android_client_info": {
+          "package_name": "com.example.footballkitstore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD419SRFh_vGnqfUjzmeT_EMcAMxW_KNaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
