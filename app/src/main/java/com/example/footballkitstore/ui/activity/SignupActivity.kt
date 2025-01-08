@@ -8,12 +8,17 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.footballkitstore.R
 import com.example.footballkitstore.databinding.ActivitySignupBinding
+import com.example.footballkitstore.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class SignupActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySignupBinding
     lateinit var auth : FirebaseAuth
+    var database : FirebaseDatabase = FirebaseDatabase.getInstance() //database instance
+    var ref : DatabaseReference = database.reference.child("users") //table instance
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,14 +32,32 @@ class SignupActivity : AppCompatActivity() {
 
         binding.button.setOnClickListener{
             var email = binding.email.text.toString()
-            var password = binding.password.text.toString()
+            var confirmpassword = binding.confirmpassword.text.toString()
+            var fullname = binding.fullname.text.toString()
+            var gender = binding.radioGroup.toString()
 
-            auth.createUserWithEmailAndPassword(email,password)
+            auth.createUserWithEmailAndPassword(email,confirmpassword)
                 .addOnCompleteListener(){
                     if(it.isSuccessful){
-                        Toast.makeText(
-                            this@SignupActivity,"Registration Success",Toast.LENGTH_LONG
-                        ).show()
+                        var userId = auth.currentUser?.uid
+
+                        var userModel = UserModel(
+                            userId.toString(),fullname,
+                            gender,email
+                        )
+
+                        ref.child(userId.toString()).setValue(userModel).addOnCompleteListener{
+                            if(it.isSuccessful){
+                                Toast.makeText(
+                                    this@SignupActivity,"Registration Success",Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        }
+
+
+
+
+
                     }else{
                         Toast.makeText(
                             this@SignupActivity,
