@@ -9,6 +9,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.footballkitstore.R
 import com.example.footballkitstore.databinding.ActivitySignupBinding
 import com.example.footballkitstore.model.UserModel
+import com.example.footballkitstore.repository.UserRepositoryImpl
+import com.example.footballkitstore.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -16,9 +18,9 @@ import com.google.firebase.database.FirebaseDatabase
 class SignupActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySignupBinding
-    lateinit var auth : FirebaseAuth
-    var database : FirebaseDatabase = FirebaseDatabase.getInstance() //database instance
-    var ref : DatabaseReference = database.reference.child("users") //table instance
+
+    lateinit var userViewModel: UserViewModel
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +30,12 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        auth = FirebaseAuth.getInstance()
+        var repo = UserRepositoryImpl()
+        userViewModel = UserViewModel(repo)
+
+
+
+
 
         binding.button.setOnClickListener{
             var email = binding.email.text.toString()
@@ -36,35 +43,61 @@ class SignupActivity : AppCompatActivity() {
             var fullname = binding.fullname.text.toString()
             var gender = binding.radioGroup.toString()
 
-            auth.createUserWithEmailAndPassword(email,confirmpassword)
-                .addOnCompleteListener(){
-                    if(it.isSuccessful){
-                        var userId = auth.currentUser?.uid
-
-                        var userModel = UserModel(
+            userViewModel.signup(email,confirmpassword){
+                success,message,userId ->
+                if(success){
+                    var userModel = UserModel(
                             userId.toString(),fullname,
                             gender,email
                         )
-
-                        ref.child(userId.toString()).setValue(userModel).addOnCompleteListener{
-                            if(it.isSuccessful){
-                                Toast.makeText(
-                                    this@SignupActivity,"Registration Success",Toast.LENGTH_LONG
-                                ).show()
-                            }
+                    userViewModel.addUserToDatabase(userId,userModel){
+                        success,message->
+                        if(success){
+                            Toast.makeText(
+                                this@SignupActivity,
+                                message,
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
-
-
-
-
-
-                    }else{
-                        Toast.makeText(
-                            this@SignupActivity,
-                            it.exception?.message,Toast.LENGTH_LONG
-                        ).show()
                     }
+                }else{
+                    Toast.makeText(
+                        this@SignupActivity,
+                        message,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
+            }
+
+//            auth.createUserWithEmailAndPassword(email,confirmpassword)
+//                .addOnCompleteListener(){
+//                    if(it.isSuccessful){
+//                        var userId = auth.currentUser?.uid
+//
+//                        var userModel = UserModel(
+//                            userId.toString(),fullname,
+//                            gender,email
+//                        )
+//
+//                        ref.child(userId.toString()).setValue(userModel).addOnCompleteListener{
+//                            if(it.isSuccessful){
+//                                Toast.makeText(
+//                                    this@SignupActivity,"Registration Success",Toast.LENGTH_LONG
+//                                ).show()
+//                            }
+//                        }
+//
+//
+//
+//
+//
+//                    }else{
+//                        Toast.makeText(
+//                            this@SignupActivity,
+//                            it.exception?.message,Toast.LENGTH_LONG
+//                        ).show()
+//                    }
+//                }
 
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

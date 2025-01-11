@@ -3,6 +3,8 @@ package com.example.footballkitstore.model
 import android.os.Parcel
 import android.os.Parcelable
 
+//Data lai temporary hold garne thau
+
 data class UserModel(
     var userId : String = "",
     var fullname : String = "",
