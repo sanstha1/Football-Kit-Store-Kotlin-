@@ -9,7 +9,7 @@
     android:background="@drawable/dashboard_background"
     android:gravity="center"
     android:padding="16dp"
-    tools:context=".DashboardActivity2">
+    tools:context=".ui.activity.DashboardActivity2">
 
     <ImageView
         android:id="@+id/logo"

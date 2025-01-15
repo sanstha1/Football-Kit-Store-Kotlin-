@@ -12,6 +12,7 @@ android {
         viewBinding = true
     }
 
+
     defaultConfig {
         applicationId = "com.example.footballkitstore"
         minSdk = 24

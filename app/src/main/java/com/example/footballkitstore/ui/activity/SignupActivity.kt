@@ -1,5 +1,6 @@
 package com.example.footballkitstore.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -10,6 +11,7 @@ import com.example.footballkitstore.R
 import com.example.footballkitstore.databinding.ActivitySignupBinding
 import com.example.footballkitstore.model.UserModel
 import com.example.footballkitstore.repository.UserRepositoryImpl
+import com.example.footballkitstore.utils.LoadingUtils
 import com.example.footballkitstore.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -21,6 +23,8 @@ class SignupActivity : AppCompatActivity() {
 
     lateinit var userViewModel: UserViewModel
 
+    lateinit var loadingUtils: LoadingUtils
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,18 +34,22 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        loadingUtils = LoadingUtils(this)
+
         var repo = UserRepositoryImpl()
         userViewModel = UserViewModel(repo)
 
 
-
-
-
         binding.button.setOnClickListener{
+
+            loadingUtils.show()
+
             var email = binding.email.text.toString()
             var confirmpassword = binding.confirmpassword.text.toString()
             var fullname = binding.fullname.text.toString()
             var gender = binding.radioGroup.toString()
+
+
 
             userViewModel.signup(email,confirmpassword){
                 success,message,userId ->
@@ -53,6 +61,14 @@ class SignupActivity : AppCompatActivity() {
                     userViewModel.addUserToDatabase(userId,userModel){
                         success,message->
                         if(success){
+                            loadingUtils.dismiss()
+                            Toast.makeText(
+                                this@SignupActivity,
+                                message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }else{
+                            loadingUtils.dismiss()
                             Toast.makeText(
                                 this@SignupActivity,
                                 message,
@@ -61,6 +77,7 @@ class SignupActivity : AppCompatActivity() {
                         }
                     }
                 }else{
+                    loadingUtils.dismiss()
                     Toast.makeText(
                         this@SignupActivity,
                         message,
@@ -69,35 +86,10 @@ class SignupActivity : AppCompatActivity() {
                 }
             }
 
-//            auth.createUserWithEmailAndPassword(email,confirmpassword)
-//                .addOnCompleteListener(){
-//                    if(it.isSuccessful){
-//                        var userId = auth.currentUser?.uid
-//
-//                        var userModel = UserModel(
-//                            userId.toString(),fullname,
-//                            gender,email
-//                        )
-//
-//                        ref.child(userId.toString()).setValue(userModel).addOnCompleteListener{
-//                            if(it.isSuccessful){
-//                                Toast.makeText(
-//                                    this@SignupActivity,"Registration Success",Toast.LENGTH_LONG
-//                                ).show()
-//                            }
-//                        }
-//
-//
-//
-//
-//
-//                    }else{
-//                        Toast.makeText(
-//                            this@SignupActivity,
-//                            it.exception?.message,Toast.LENGTH_LONG
-//                        ).show()
-//                    }
-//                }
+            val intent = Intent(this, HomepageActivity::class.java)
+            intent.putExtra("fullName", fullname)
+
+
 
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
