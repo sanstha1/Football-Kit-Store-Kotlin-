@@ -33,27 +33,19 @@
         android:layout_height="50dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="36dp"
+        android:inputType="numberDecimal"
         android:hint="Price"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
-    <EditText
-        android:id="@+id/quantity"
-        android:layout_width="308dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="40dp"
-        android:hint="Quantity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price" />
 
     <Button
         android:id="@+id/addbutton"
         android:layout_width="222dp"
         android:layout_height="50dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="80dp"
         android:text="Add"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quantity" />
+        app:layout_constraintTop_toBottomOf="@+id/price" />
 </androidx.constraintlayout.widget.ConstraintLayout>
