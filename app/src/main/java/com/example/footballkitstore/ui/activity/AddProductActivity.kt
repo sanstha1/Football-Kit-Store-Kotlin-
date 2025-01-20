@@ -1,6 +1,7 @@
 package com.example.footballkitstore.ui.activity
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -38,7 +39,16 @@ class AddProductActivity : AppCompatActivity() {
 
             var model = ProductModel("",name,description,price)
 
-
+            productViewModel.addProduct(model){
+                success,message->
+                if(success){
+                    Toast.makeText(this@AddProductActivity,
+                        message,Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(this@AddProductActivity,
+                        message,Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         setContentView(R.layout.activity_add_product)

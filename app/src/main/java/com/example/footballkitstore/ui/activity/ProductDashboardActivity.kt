@@ -21,7 +21,8 @@ class ProductDashboardActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.floatingActionButton.setOnClickListener{
-            var intent = Intent(this@ProductDashboardActivity,AddProductActivity::class.java)
+            var intent = Intent(this@ProductDashboardActivity,
+                AddProductActivity::class.java)
             startActivity(intent)
         }
 
