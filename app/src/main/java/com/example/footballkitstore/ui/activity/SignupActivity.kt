@@ -39,19 +39,28 @@ class SignupActivity : AppCompatActivity() {
         var repo = UserRepositoryImpl()
         userViewModel = UserViewModel(repo)
 
+        binding.login.setOnClickListener{
+            val intent = Intent(this@SignupActivity,
+                LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+//        val intent = Intent(this, HomepageActivity::class.java)
+//        intent.putExtra("fullName",fullname)
+
 
         binding.button.setOnClickListener{
 
             loadingUtils.show()
 
             var email = binding.email.text.toString()
-            var confirmpassword = binding.confirmpassword.text.toString()
+            var password = binding.password.text.toString()
             var fullname = binding.fullname.text.toString()
             var gender = binding.radioGroup.toString()
 
 
 
-            userViewModel.signup(email,confirmpassword){
+            userViewModel.signup(email,password){
                 success,message,userId ->
                 if(success){
                     var userModel = UserModel(
@@ -67,6 +76,11 @@ class SignupActivity : AppCompatActivity() {
                                 message,
                                 Toast.LENGTH_LONG
                             ).show()
+
+                            val intent = Intent(this@SignupActivity,
+                                LoginActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }else{
                             loadingUtils.dismiss()
                             Toast.makeText(
@@ -85,11 +99,6 @@ class SignupActivity : AppCompatActivity() {
                     ).show()
                 }
             }
-
-            val intent = Intent(this, HomepageActivity::class.java)
-            intent.putExtra("fullName", fullname)
-
-
 
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

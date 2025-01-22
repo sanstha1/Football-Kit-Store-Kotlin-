@@ -17,7 +17,7 @@ interface UserRepository {
     "statuscode" : 200 then callback int must be added
      */
 
-    fun login(email:String,password:String,
+    fun login(email:String,password: String,
               callback:(Boolean,String) -> Unit ) //response
 
     //authentication

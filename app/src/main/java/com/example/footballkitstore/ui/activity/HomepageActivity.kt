@@ -17,31 +17,30 @@ import com.example.footballkitstore.ui.fragment.ProfileFragment
 
 class HomepageActivity : AppCompatActivity() {
 
-        lateinit var binding: ActivityHomepageBinding
+    lateinit var homepageBinding: ActivityHomepageBinding
+
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager: FragmentManager = supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+
+        fragmentTransaction.replace(R.id.frameLayout,fragment)
+        fragmentTransaction.commit()
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityHomepageBinding.inflate(layoutInflater)
+        homepageBinding = ActivityHomepageBinding.inflate(layoutInflater)
 
-        setContentView(binding.root)
-
-        setContentView(R.layout.activity_homepage)
-        val fullName = intent.getStringExtra("fullName")
-
-        findViewById<TextView>(R.id.welcome).text = "Welcome, $fullName"
-
-
-
-
-
+        setContentView(homepageBinding.root)
 
         replaceFragment(HomeFragment())
 
-        binding.buttonNavigationBar.setOnItemSelectedListener{
+        homepageBinding.buttonNavigationBar.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.home ->replaceFragment(HomeFragment())
+                R.id.home -> replaceFragment(HomeFragment())
                 R.id.matched -> replaceFragment(MatchedFragment())
                 R.id.profile -> replaceFragment(ProfileFragment())
                 else -> {}
@@ -49,17 +48,12 @@ class HomepageActivity : AppCompatActivity() {
             true
         }
 
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
-    private fun replaceFragment(fragment: Fragment){
-        val fragmentManager : FragmentManager = supportFragmentManager
-        val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
-
-        fragmentTransaction.replace(R.id.frameLayout,fragment)
-        fragmentTransaction.commit()
     }
 }

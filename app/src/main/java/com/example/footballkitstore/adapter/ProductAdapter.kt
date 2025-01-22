@@ -1,6 +1,7 @@
 package com.example.footballkitstore.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.footballkitstore.R
 import com.example.footballkitstore.model.ProductModel
+import com.example.footballkitstore.ui.activity.UpdateProductActivity
 
 
 class ProductAdapter(
@@ -16,9 +18,10 @@ class ProductAdapter(
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
     class ProductViewHolder(itemView: View)
         : RecyclerView.ViewHolder(itemView){
+        val edit : TextView = itemView.findViewById(R.id.textupdate)
         val pName : TextView = itemView.findViewById(R.id.productname)
-        val pPrice : TextView = itemView.findViewById(R.id.productprice)
         val pDesc : TextView = itemView.findViewById(R.id.productdesc)
+        val pPrice : TextView = itemView.findViewById(R.id.productprice)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -35,8 +38,18 @@ class ProductAdapter(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.pName.text = data[position].productName
-        holder.pPrice.text = data[position].price.toString()
         holder.pDesc.text = data[position].productDesc
+        holder.pPrice.text = data[position].price.toString()
+
+        holder.edit.setOnClickListener{
+            val intent = Intent(context,
+                UpdateProductActivity::class.java)
+
+            intent.putExtra("productId",data[position].productId)
+            context.startActivity(intent)
+
+        }
+
     }
 
     fun updateData(products : List<ProductModel>){

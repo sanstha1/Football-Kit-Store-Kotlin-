@@ -16,11 +16,12 @@ import com.example.footballkitstore.viewmodel.ProductViewModel
 class AddProductActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityAddProductBinding
+
     lateinit var productViewModel: ProductViewModel
+
     lateinit var loadingUtils: LoadingUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
@@ -51,7 +52,6 @@ class AddProductActivity : AppCompatActivity() {
             }
         }
 
-        setContentView(R.layout.activity_add_product)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

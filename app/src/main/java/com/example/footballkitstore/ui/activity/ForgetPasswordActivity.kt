@@ -26,7 +26,7 @@ class ForgetPasswordActivity : AppCompatActivity() {
         var repo = UserRepositoryImpl()
         userViewModel = UserViewModel(repo)
 
-        forgetPasswordBinding.forgotbutton.setOnClickListener {
+        forgetPasswordBinding.resetbutton.setOnClickListener {
             loadingUtils.show()
             var email: String = forgetPasswordBinding.email.text.toString()
 
@@ -41,7 +41,6 @@ class ForgetPasswordActivity : AppCompatActivity() {
 
                 }
             }
-        setContentView(R.layout.activity_forget_password)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
