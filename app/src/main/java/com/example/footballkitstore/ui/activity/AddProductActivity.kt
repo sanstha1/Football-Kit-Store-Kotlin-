@@ -1,5 +1,6 @@
 package com.example.footballkitstore.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -45,6 +46,11 @@ class AddProductActivity : AppCompatActivity() {
                 if(success){
                     Toast.makeText(this@AddProductActivity,
                         message,Toast.LENGTH_SHORT).show()
+
+                    var intent = Intent(this@AddProductActivity,ProductDashboardActivity::class.java)
+                    startActivity(intent)
+                    finish()
+
                 }else{
                     Toast.makeText(this@AddProductActivity,
                         message,Toast.LENGTH_SHORT).show()

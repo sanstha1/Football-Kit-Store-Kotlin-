@@ -1,6 +1,7 @@
 package com.example.footballkitstore.ui.activity
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -20,6 +21,13 @@ class DashboardActivity2 : AppCompatActivity() {
         setContentView(R.layout.activity_dashboard2)
         imageView = findViewById(R.id.logo)
         button = findViewById(R.id.startshopping)
+
+        button.setOnClickListener{
+            val intent = Intent(this@DashboardActivity2,SignupActivity::class.java)
+            startActivity(intent)
+        }
+
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

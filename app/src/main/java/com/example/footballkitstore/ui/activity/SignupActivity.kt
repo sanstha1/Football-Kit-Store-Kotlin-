@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
+@Suppress("NAME_SHADOWING")
 class SignupActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySignupBinding
@@ -39,8 +40,8 @@ class SignupActivity : AppCompatActivity() {
         var repo = UserRepositoryImpl()
         userViewModel = UserViewModel(repo)
 
-        binding.login.setOnClickListener{
-            val intent = Intent(this@SignupActivity,
+        binding.loginbutton.setOnClickListener{
+            var intent = Intent(this@SignupActivity,
                 LoginActivity::class.java)
             startActivity(intent)
         }
@@ -49,23 +50,28 @@ class SignupActivity : AppCompatActivity() {
 //        intent.putExtra("fullName",fullname)
 
 
-        binding.button.setOnClickListener{
+        binding.signupbutton.setOnClickListener{
+            loadingUtils.show()
+            var email = binding.email.text.toString().trim()
+            var password = binding.password.text.toString().trim()
+            var fullname = binding.fullname.text.toString().trim()
+            var gender = binding.radioGroup.checkedRadioButtonId
+
+            if (email.isEmpty() || password.isEmpty() || fullname.isEmpty() || gender == -1){
+                Toast.makeText(this, "Fill all the fields", Toast.LENGTH_LONG)
+                    .show()
+            }
+
+            var gender2 = findViewById<android.widget.RadioButton>(gender).text.toString()
 
             loadingUtils.show()
-
-            var email = binding.email.text.toString()
-            var password = binding.password.text.toString()
-            var fullname = binding.fullname.text.toString()
-            var gender = binding.radioGroup.toString()
-
-
 
             userViewModel.signup(email,password){
                 success,message,userId ->
                 if(success){
                     var userModel = UserModel(
                             userId.toString(),fullname,
-                            gender,email
+                            gender2,email
                         )
                     userViewModel.addUserToDatabase(userId,userModel){
                         success,message->
@@ -76,6 +82,8 @@ class SignupActivity : AppCompatActivity() {
                                 message,
                                 Toast.LENGTH_LONG
                             ).show()
+//                            startActivity(Intent(this@SignupActivity,LoginActivity::class.java))
+//                            finish()
 
                             val intent = Intent(this@SignupActivity,
                                 LoginActivity::class.java)

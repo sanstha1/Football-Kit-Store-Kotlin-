@@ -10,61 +10,74 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.footballkitstore.R
 import com.example.footballkitstore.databinding.ActivityLoginBinding
 import com.example.footballkitstore.repository.UserRepositoryImpl
+import com.example.footballkitstore.utils.LoadingUtils
 import com.example.footballkitstore.viewmodel.UserViewModel
 import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var loginBinding: ActivityLoginBinding
+    lateinit var binding: ActivityLoginBinding
     lateinit var userViewModel: UserViewModel
+    lateinit var loadingUtils: LoadingUtils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        loginBinding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(loginBinding.root)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         var repo = UserRepositoryImpl()
         userViewModel = UserViewModel(repo)
+        loadingUtils = LoadingUtils(this)
 
-        loginBinding.login.setOnClickListener{
-            //show
-            var email : String = loginBinding.email.text.toString()
-            var password : String = loginBinding.password.text.toString()
+        binding.login.setOnClickListener {
+           var email : String = binding.email.text.toString()
+           var password : String = binding.password.text.toString()
 
-            userViewModel.login(email,password){
-                success,message->
-                if(success){
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Email and password must not be empty", Toast.LENGTH_LONG)
+                    .show()
+            }
+            loadingUtils.show()
+
+            userViewModel.login(email, password) { success, message ->
+                loadingUtils.dismiss()
+                if (success) {
                     //dismiss
-                    Toast.makeText(this@LoginActivity,message,
-                        Toast.LENGTH_LONG).show()
-
-                    var intent = Intent(this@LoginActivity,HomepageActivity::class.java)
+                    Toast.makeText(
+                        this@LoginActivity, message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                    var intent = Intent(this@LoginActivity, HomepageActivity::class.java)
                     startActivity(intent)
                     finish()
-                }else{
+
+                } else {
                     //dismiss
-                    Toast.makeText(applicationContext,message,Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LoginActivity, message, Toast.LENGTH_LONG).show()
                 }
             }
         }
 
-        loginBinding.forgotpassword.setOnClickListener{
-            val intent = Intent(this@LoginActivity,
-                ForgetPasswordActivity::class.java)
-            startActivity(intent)
-        }
+            binding.forgotpassword.setOnClickListener {
+                val intent = Intent(
+                    this@LoginActivity,
+                    ForgetPasswordActivity::class.java
+                )
+                startActivity(intent)
+            }
 
-        loginBinding.register.setOnClickListener{
-            val intent = Intent(this@LoginActivity, SignupActivity::class.java)
-            startActivity(intent)
-        }
+            binding.register.setOnClickListener {
+                val intent = Intent(this@LoginActivity, SignupActivity::class.java)
+                startActivity(intent)
+            }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+                insets
+            }
+
     }
 }

@@ -1,6 +1,7 @@
 package com.example.footballkitstore.ui.activity
 
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -22,23 +23,37 @@ class ForgetPasswordActivity : AppCompatActivity() {
         forgetPasswordBinding = ActivityForgetPasswordBinding.inflate(layoutInflater)
         setContentView(forgetPasswordBinding.root)
 
+
         //initializing auth viewmodel
         var repo = UserRepositoryImpl()
         userViewModel = UserViewModel(repo)
+        loadingUtils = LoadingUtils(this)
+
 
         forgetPasswordBinding.resetbutton.setOnClickListener {
+            var email: String = forgetPasswordBinding.email.text.toString().trim()
+
+            if (!isValidEmail(email)) {
+                Toast.makeText(
+                    this@ForgetPasswordActivity,
+                    "Please enter a valid email address",
+                    Toast.LENGTH_LONG
+                ).show()
+                forgetPasswordBinding.email.requestFocus()
+                return@setOnClickListener
+            }
+
             loadingUtils.show()
-            var email: String = forgetPasswordBinding.email.text.toString()
 
             userViewModel.forgetPassword(email) { success, message ->
+
+                loadingUtils.dismiss()
+
                 if (success) {
-                    loadingUtils.dismiss()
                     Toast.makeText(this@ForgetPasswordActivity, message, Toast.LENGTH_LONG).show()
                     finish()
                 } else {
-                    loadingUtils.dismiss()
                     Toast.makeText(this@ForgetPasswordActivity, message, Toast.LENGTH_LONG).show()
-
                 }
             }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -48,4 +63,8 @@ class ForgetPasswordActivity : AppCompatActivity() {
         }
     }
 }
+
+    private fun isValidEmail(email: String): Boolean {
+        return email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
 }

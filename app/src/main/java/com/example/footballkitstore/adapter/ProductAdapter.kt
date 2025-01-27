@@ -57,4 +57,9 @@ class ProductAdapter(
         data.addAll(products)
         notifyDataSetChanged()
     }
+
+    fun getProductId(position: Int) : String{
+        return data[position].productId
+    }
+
 }
