@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.footballkitstore.R
 import com.example.footballkitstore.databinding.ActivityHomepageBinding
+import com.example.footballkitstore.ui.fragment.CartFragment
 import com.example.footballkitstore.ui.fragment.HomeFragment
-import com.example.footballkitstore.ui.fragment.MatchedFragment
 import com.example.footballkitstore.ui.fragment.ProfileFragment
 
 class HomepageActivity : AppCompatActivity() {
@@ -41,7 +41,7 @@ class HomepageActivity : AppCompatActivity() {
         homepageBinding.buttonNavigationBar.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home -> replaceFragment(HomeFragment())
-                R.id.matched -> replaceFragment(MatchedFragment())
+                R.id.matched -> replaceFragment(CartFragment())
                 R.id.profile -> replaceFragment(ProfileFragment())
                 else -> {}
             }
