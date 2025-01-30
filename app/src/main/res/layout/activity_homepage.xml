@@ -9,8 +9,8 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="412dp"
-        android:layout_height="613dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/buttonNavigationBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -30,13 +30,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/nevigation_menu"/>
 
-    <TextView
-        android:id="@+id/welcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Welcome,"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
