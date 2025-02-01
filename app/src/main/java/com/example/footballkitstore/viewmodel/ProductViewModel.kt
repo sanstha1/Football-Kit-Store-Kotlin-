@@ -1,5 +1,7 @@
 package com.example.footballkitstore.viewmodel
 
+import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import com.example.footballkitstore.model.ProductModel
 import com.example.footballkitstore.repository.ProductRepository
@@ -54,5 +56,8 @@ class ProductViewModel (val repo: ProductRepository){
                 _loading.value = false
             }
         }
+    }
+    fun uploadImage(context: Context, imageUri: Uri, callback: (String?) -> Unit){
+        repo.uploadImage(context, imageUri, callback)
     }
 }
