@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/dashboard_background"
+    android:background="@drawable/background"
     android:gravity="center"
     android:padding="16dp"
     tools:context=".ui.activity.DashboardActivity2">
@@ -15,7 +15,7 @@
         android:id="@+id/logo"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:src="@drawable/logo2" />
+        android:src="@drawable/logo2_transparent" />
 
     <Button
         android:id="@+id/startshopping"

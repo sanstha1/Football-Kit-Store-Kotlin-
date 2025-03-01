@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:gravity="center"
-    android:background="@color/white"
     tools:context=".ui.activity.SignupActivity">
 
     <ImageView
@@ -15,7 +15,7 @@
         android:layout_height="150sp"
         android:layout_marginStart="128dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/logo3"
+        android:src="@drawable/logo_transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,6 +26,7 @@
         android:layout_marginStart="156dp"
         android:layout_marginTop="16dp"
         android:text="REGISTER"
+        android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +38,11 @@
         android:layout_height="49dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="20dp"
+        android:background="#30ffffff"
+        android:drawablePadding="15dp"
+        android:drawableLeft="@drawable/baseline_account_circle_24"
         android:hint="Full name"
+        android:textColorHint="@color/white"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup" />
@@ -48,6 +53,10 @@
         android:layout_height="49dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="4dp"
+        android:textColorHint="@color/white"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="15dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +68,10 @@
         android:layout_height="49dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
+        android:textColorHint="@color/white"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/baseline_donut_large_24"
+        android:drawablePadding="15dp"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +83,10 @@
         android:layout_height="49dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="4dp"
+        android:textColorHint="@color/white"
+        android:background="#30ffffff"
+        android:drawableLeft="@drawable/baseline_donut_large_24"
+        android:drawablePadding="15dp"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,6 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="91dp"
         android:layout_marginTop="27dp"
+        android:textColor="@color/white"
         android:text="Already have an account?"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupbutton" />
@@ -138,6 +156,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="108dp"
+        android:textColor="@color/white"
         android:text="LOG IN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupbutton" />
