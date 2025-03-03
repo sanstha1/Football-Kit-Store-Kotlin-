@@ -26,9 +26,9 @@ class AddProductActivity : AppCompatActivity() {
 
     lateinit var loadingUtils: LoadingUtils
 
-    lateinit var  imageUtils: ImageUtils
-
-    var imageUri: Uri? = null
+//    lateinit var  imageUtils: ImageUtils
+//
+//    var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,51 +37,56 @@ class AddProductActivity : AppCompatActivity() {
         binding = ActivityAddProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        imageUtils = ImageUtils(this)
+//        imageUtils = ImageUtils(this)
 
         loadingUtils=LoadingUtils(this)
 
         var repo = ProductRepositoryImplementation()
         productViewModel = ProductViewModel(repo)
 
-        imageUtils.registerActivity { url ->
-            url.let { it ->
-                imageUri = it
-                Picasso.get().load(it).into(binding.imageBrowse)
-            }
-        }
-        binding.imageBrowse.setOnClickListener {
-            imageUtils.launchGallery(this)
-        }
-        binding.addbutton.setOnClickListener {
-            uploadImage()
-
+        binding.arrowbackadd.setOnClickListener{
+            val intent = Intent(this@AddProductActivity, ProductDashboardActivity::class.java)
+            startActivity(intent)
         }
 
-
-//        binding.addbutton.setOnClickListener{
-//            val name = binding.productname.text.toString()
-//            val description = binding.description.text.toString()
-//            val price = binding.price.text.toString().toInt()
-//
-//            var model = ProductModel("",name,description,price)
-//
-//            productViewModel.addProduct(model){
-//                success,message->
-//                if(success){
-//                    Toast.makeText(this@AddProductActivity,
-//                        message,Toast.LENGTH_SHORT).show()
-//
-//                    var intent = Intent(this@AddProductActivity,ProductDashboardActivity::class.java)
-//                    startActivity(intent)
-//                    finish()
-//
-//                }else{
-//                    Toast.makeText(this@AddProductActivity,
-//                        message,Toast.LENGTH_SHORT).show()
-//                }
+//        imageUtils.registerActivity { url ->
+//            url.let { it ->
+//                imageUri = it
+//                Picasso.get().load(it).into(binding.imageBrowse)
 //            }
 //        }
+//        binding.imageBrowse.setOnClickListener {
+//            imageUtils.launchGallery(this)
+//        }
+//        binding.addbutton.setOnClickListener {
+//            uploadImage()
+//
+//        }
+
+
+        binding.addbutton.setOnClickListener{
+            val name = binding.productname.text.toString()
+            val description = binding.description.text.toString()
+            val price = binding.price.text.toString().toInt()
+
+            var model = ProductModel("",name,description,price)
+
+            productViewModel.addProduct(model){
+                success,message->
+                if(success){
+                    Toast.makeText(this@AddProductActivity,
+                        message,Toast.LENGTH_SHORT).show()
+
+                    var intent = Intent(this@AddProductActivity,ProductDashboardActivity::class.java)
+                    startActivity(intent)
+                    finish()
+
+                }else{
+                    Toast.makeText(this@AddProductActivity,
+                        message,Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -90,19 +95,19 @@ class AddProductActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadImage() {
-        loadingUtils.show()
-        imageUri?.let { uri ->
-            productViewModel.uploadImage(this, uri) { imageUrl ->
-                Log.d("checpoirs", imageUrl.toString())
-                if (imageUrl != null) {
-                    addProduct(imageUrl)
-                } else {
-                    Log.e("Upload Error", "Failed to upload image to Cloudinary")
-                }
-            }
-        }
-    }
+//    private fun uploadImage() {
+//        loadingUtils.show()
+//        imageUri?.let { uri ->
+//            productViewModel.uploadImage(this, uri) { imageUrl ->
+//                Log.d("checpoirs", imageUrl.toString())
+//                if (imageUrl != null) {
+//                    addProduct(imageUrl)
+//                } else {
+//                    Log.e("Upload Error", "Failed to upload image to Cloudinary")
+//                }
+//            }
+//        }
+//    }
 
     private fun addProduct(url: String) {
         var productName = binding.productname.text.toString()

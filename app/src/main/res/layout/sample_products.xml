@@ -40,12 +40,13 @@
 
             <TextView
                 android:id="@+id/textupdate"
-                android:layout_width="wrap_content"
+                android:layout_width="53dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:text="Update"
-                android:textColor="@color/red" />
+                android:layout_marginLeft="250dp"
+                android:fontFamily="monospace"
+                android:text="Edit"
+                android:textColor="@color/red"
+                android:textSize="15sp" />
 
 
         </LinearLayout>

@@ -56,7 +56,7 @@
         android:textColorHint="@color/white"
         android:textColor="@color/black"
         android:background="#30ffffff"
-        android:drawableLeft="@drawable/baseline_donut_large_24"
+        android:drawableLeft="@drawable/password"
         android:drawablePadding="15dp"
         android:hint="Password"
         android:inputType="textPassword"

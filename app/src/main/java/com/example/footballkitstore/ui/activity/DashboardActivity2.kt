@@ -29,7 +29,7 @@ class DashboardActivity2 : AppCompatActivity() {
             startActivity(intent)
         }
         adminimage.setOnClickListener{
-            val intent = Intent(this@DashboardActivity2,AdminloginActivity::class.java)
+            val intent = Intent(this@DashboardActivity2,AdminActivity::class.java)
             startActivity(intent)
         }
 

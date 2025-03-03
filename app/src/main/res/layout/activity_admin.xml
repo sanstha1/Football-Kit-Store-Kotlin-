@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".ui.activity.AdminloginActivity">
+    tools:context=".ui.activity.AdminActivity">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <EditText
-        android:id="@+id/emailadmin"
+        android:id="@+id/adminemail"
         android:layout_width="328dp"
         android:layout_height="48dp"
         android:layout_marginStart="41dp"
@@ -47,22 +47,22 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
-        android:id="@+id/passwordadmin"
+        android:id="@+id/adminpassword"
         android:layout_width="328dp"
         android:layout_height="48dp"
         android:layout_marginStart="41dp"
         android:layout_marginTop="42dp"
         android:background="#30ffffff"
-        android:drawableLeft="@drawable/baseline_donut_large_24"
+        android:drawableLeft="@drawable/password"
         android:drawablePadding="15dp"
         android:hint="Password"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         android:textColorHint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailadmin" />
+        app:layout_constraintTop_toBottomOf="@+id/adminemail" />
 
     <Button
-        android:id="@+id/adminlogin"
+        android:id="@+id/loginadmin"
         android:layout_width="173dp"
         android:layout_height="50dp"
         android:layout_marginTop="45dp"
@@ -70,10 +70,10 @@
         android:backgroundTint="@color/black"
         android:text="LOG IN"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordadmin" />
+        app:layout_constraintTop_toBottomOf="@+id/adminpassword" />
 
     <ImageView
-        android:id="@+id/arrowback"
+        android:id="@+id/arrowbackadmin"
         android:layout_width="49dp"
         android:layout_height="34dp"
         android:layout_marginStart="7dp"

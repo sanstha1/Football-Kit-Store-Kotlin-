@@ -1,5 +1,6 @@
 package com.example.footballkitstore.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -20,6 +21,7 @@ class UpdateProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
 
         binding = ActivityUpdateProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -61,6 +63,11 @@ class UpdateProductActivity : AppCompatActivity() {
             }
 
 
+        }
+
+        binding.arrowbackupdate.setOnClickListener{
+            val intent = Intent(this@UpdateProductActivity, ProductDashboardActivity::class.java)
+            startActivity(intent)
         }
 
 

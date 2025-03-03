@@ -8,7 +8,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +29,8 @@ class ProductDashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+
 
         binding = ActivityProductDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -63,6 +64,11 @@ class ProductDashboardActivity : AppCompatActivity() {
         binding.floatingActionButton.setOnClickListener{
             var intent = Intent(this@ProductDashboardActivity,
                 AddProductActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.arrowbackproduct.setOnClickListener{
+            val intent = Intent(this@ProductDashboardActivity, AdminActivity::class.java)
             startActivity(intent)
         }
 
